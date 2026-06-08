@@ -1,0 +1,30 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "data/us-10m.json",
+    "format": {"type": "topojson", "feature": "states"}
+  },
+  "transform": [
+    {"calculate": "pad(datum.id, 2, '0', 'left')", "as": "string_fips"},
+    {
+      "lookup": "string_fips",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv"
+        },
+        "key": "fips",
+        "fields": ["cases", "date"]
+      }
+    }
+  ],
+  "vconcat": [
+    {
+      "projection": {"type": "albersUsa"},
+      "mark": "geoshape",
+      "encoding": {
+        "color": {"field": "cases", "type": "quantitative"},
+        "tooltip": {"field": "cases"}
+      }
+    }
+  ]
+}

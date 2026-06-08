@@ -1,0 +1,14 @@
+﻿# Ignore massive datasets and archives
+*.csv
+*.xlsx
+*.flt
+*.zip
+*.rds
+*.RData
+*.sqlite
+*.db
+.DS_Store
+__pycache__/
+*.ipynb_checkpoints/
+*.tar.gz
+*.exe
